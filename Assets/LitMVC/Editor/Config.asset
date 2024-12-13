@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80948209ef1daaa4fb2e722761d45fab, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  _viewPath: Assets/Scripts/LitMVC\MVC\View
-  _logicPath: Assets/Scripts/LitMVC\MVC\Logic
-  _servicePath: Assets/Scripts/LitMVC\MVC\Service
-  _modelPath: Assets/Scripts/LitMVC\MVC\Model
+  _viewPath: Assets/LitMVC\MVC\View
+  _logicPath: Assets/LitMVC\MVC\Logic
+  _servicePath: Assets/LitMVC\MVC\Service
+  _modelPath: Assets/LitMVC\MVC\Model
   UiMap: []

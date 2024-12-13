@@ -102,13 +102,13 @@ public class CreateUIScript : Editor {
     static void BindUI() {
         if (!_mvcUIConfig) _mvcUIConfig = UIConfig.GetUIConfig();
         var assembly = Assembly.Load("Assembly-CSharp");
-        List<ViewData> removeList = new List<ViewData>();
+        List<int> removeList = new List<int>();
         var bindData=_mvcUIConfig.UiMap;
         for (int i = 0; i < bindData.Count; i++) {
             var viewType = assembly.GetType(bindData[i].scriptName);
             //剔除已经失效的绑定数据：
             if (viewType == null || !bindData[i].uiPrefab || bindData[i].uiPrefab.TryGetComponent(viewType, out _)) {
-                removeList.Add(bindData[i]);
+                removeList.Add(i);
                 continue;
             } else {
                 var script = bindData[i].uiPrefab.AddComponent(viewType);
@@ -122,9 +122,12 @@ public class CreateUIScript : Editor {
         }
         
         //清理失效的绑定数据：
-        foreach (var removeData in removeList) {
-            _mvcUIConfig.UiMap.Remove(removeData);
+        for (int i = removeList.Count-1; i >= 0; i--) {
+            _mvcUIConfig.UiMap.RemoveAt(removeList[i]);
         }
+        // foreach (var removeData in removeList) {
+        //     _mvcUIConfig.UiMap.Remove(removeData);
+        // }
         EditorUtility.SetDirty(_mvcUIConfig);
         AssetDatabase.SaveAssets();
     }
