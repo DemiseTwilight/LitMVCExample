@@ -1,14 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using LitMVC;
 using TMPro;
-using Unity.EditorCoroutines.Editor;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -23,7 +19,7 @@ public class CreateUIScript : Editor {
         public string type;
         public Component component;
     }
-    private static Dictionary<string,ComponentData> _componentDatas=new Dictionary<string,ComponentData>();
+    private static Dictionary<string,ComponentData> _componentData=new Dictionary<string,ComponentData>();
     
     [MenuItem("Assets/MVC/CreateUIView", false, 10)]
     private static void GenUIView() {
@@ -48,7 +44,7 @@ public class CreateUIScript : Editor {
         StringBuilder uiScriptsPath = new StringBuilder();
         //View生成，刷新并绑定
         uiScriptsPath.Clear();
-        _componentDatas.Clear();
+        _componentData.Clear();
         TotalComponentList(uiPrefab);
         var scriptName = uiPrefab.name + "View";
         StringBuilder scriptText = new StringBuilder();
@@ -58,7 +54,7 @@ public class CreateUIScript : Editor {
         scriptText.AppendLine("using LitMVC;");
         scriptText.AppendLine("namespace LitMVC {");
         scriptText.Append("\tpublic partial class ").Append(scriptName).Append(" : UIView {").AppendLine();
-        foreach (var component in _componentDatas.Values) {
+        foreach (var component in _componentData.Values) {
             scriptText.AppendFormat("\t\tpublic {0} {1};", component.type, component.name).AppendLine();
         }
         scriptText.AppendLine("\t}").AppendLine("}");
@@ -83,7 +79,7 @@ public class CreateUIScript : Editor {
         //记录绑定数据
         var uiBindData = new ViewData() {
             scriptName = "LitMVC." + scriptName, uiPrefab = uiPrefab, 
-            components = _componentDatas.Values.Select(data=> new ComponentMap() { 
+            components = _componentData.Values.Select(data=> new ComponentMap() { 
                 handleName = data.name,
                 component = data.component }
             ).ToList()
@@ -107,10 +103,11 @@ public class CreateUIScript : Editor {
         for (int i = 0; i < bindData.Count; i++) {
             var viewType = assembly.GetType(bindData[i].scriptName);
             //剔除已经失效的绑定数据：
-            if (viewType == null || !bindData[i].uiPrefab || bindData[i].uiPrefab.TryGetComponent(viewType, out _)) {
+            if (viewType == null || !bindData[i].uiPrefab) {
                 removeList.Add(i);
                 continue;
-            } else {
+            } 
+            if(!bindData[i].uiPrefab.TryGetComponent(viewType, out _)){
                 var script = bindData[i].uiPrefab.AddComponent(viewType);
                 //绑定组件
                 foreach (var componentMap in bindData[i].components) {
@@ -123,6 +120,7 @@ public class CreateUIScript : Editor {
         
         //清理失效的绑定数据：
         for (int i = removeList.Count-1; i >= 0; i--) {
+            Debug.Log("删除绑定记录:"+_mvcUIConfig.UiMap[i].scriptName);
             _mvcUIConfig.UiMap.RemoveAt(removeList[i]);
         }
         // foreach (var removeData in removeList) {
@@ -158,7 +156,7 @@ public class CreateUIScript : Editor {
         //不能添加说明有重复对象：
         int i = 0;
         var originalName=data.name;
-        while (!_componentDatas.TryAdd(data.name, data)) {
+        while (!_componentData.TryAdd(data.name, data)) {
             i++;
             data.name = originalName;
             data.name += i.ToString();

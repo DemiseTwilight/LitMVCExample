@@ -16,4 +16,9 @@ MonoBehaviour:
   _logicPath: Assets/LitMVC\MVC\Logic
   _servicePath: Assets/LitMVC\MVC\Service
   _modelPath: Assets/LitMVC\MVC\Model
-  UiMap: []
+  UiMap:
+  - scriptName: LitMVC.TestPageView
+    uiPrefab: {fileID: 6977398180018836974, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    components:
+    - handleName: m_img_bg
+      component: {fileID: 2318376721998888646, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
