@@ -70,7 +70,7 @@ public class CreateUIScript : Editor {
         //Logic只生成，不刷新
         uiScriptsPath.Clear();
         var controllerFilePath = uiScriptsPath.Append(_mvcUIConfig.GetLogicPath()).Append("/")
-            .Append(uiPrefab.name).Append("View.cs").ToString();
+            .Append(uiPrefab.name).Append("Logic.cs").ToString();
         scriptText.Clear();
         if (!File.Exists(controllerFilePath)) {
             scriptText.AppendLine("namespace LitMVC {");
