@@ -53,7 +53,9 @@ public class CreateUIScript : Editor {
         scriptText.AppendLine("using TMPro;");
         scriptText.AppendLine("using LitMVC;");
         scriptText.AppendLine("namespace LitMVC {");
-        scriptText.Append("\tpublic partial class ").Append(scriptName).Append(" : UIView {").AppendLine();
+        scriptText.AppendLine($"\tpublic partial class {scriptName} : UIView {{");
+        scriptText.AppendLine($"\t\tpublic const string VIEW_NAME = \"{uiPrefab.name}\";");
+        
         foreach (var component in _componentData.Values) {
             scriptText.AppendFormat("\t\tpublic {0} {1};", component.type, component.name).AppendLine();
         }
