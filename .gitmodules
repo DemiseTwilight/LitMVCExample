@@ -1,0 +1,3 @@
+[submodule "Assets/LitMVC"]
+	path = Assets/LitMVC
+	url = https://github.com/DemiseTwilight/LitMVC.git
