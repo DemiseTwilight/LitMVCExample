@@ -1,4 +1,5 @@
-# LitMVC
+# LitMVC示例项目
+LitMVC项目地址：https://github.com/DemiseTwilight/LitMVC.git
 适用于unity的超轻量级MVC框架 <br> 
 可以用于中小型项目快速开发UI系统的基本框架结构。
 ## 使用方法
