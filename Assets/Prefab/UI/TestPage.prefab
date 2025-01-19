@@ -477,7 +477,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6123187006784727901}
-  - component: {fileID: 1880612514334001747}
   m_Layer: 5
   m_Name: TestPage
   m_TagString: Untagged
@@ -508,22 +507,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1880612514334001747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6977398180018836974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e3042a75ce261a4ab1ced0131ef4b47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_img_bg: {fileID: 2318376721998888646}
-  m_btn_1: {fileID: 8800028800107728385}
-  m_btn_2: {fileID: 253941852711943652}
-  m_btn_3: {fileID: 3107776410113397279}
 --- !u!1 &8510630218670497924
 GameObject:
   m_ObjectHideFlags: 0
