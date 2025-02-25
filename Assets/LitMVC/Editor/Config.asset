@@ -16,4 +16,23 @@ MonoBehaviour:
   _logicPath: Assets/LitMVC\MVC\Logic
   _servicePath: Assets/LitMVC\MVC\Service
   _modelPath: Assets/LitMVC\MVC\Model
-  UiMap: []
+  UiMap:
+  - scriptName: LitMVC.Page1View
+    uiPrefab: {fileID: 4301121332492637136, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+    components:
+    - handleName: m_text_t_TMP_Text
+      component: {fileID: 8553403895491483857, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+    - handleName: m_btn_back_Button
+      component: {fileID: 7700744134007962437, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+    - handleName: m_btn_back_Image
+      component: {fileID: 7618559778181102997, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+    - handleName: m_btn_left_Button
+      component: {fileID: 346035207666070965, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+    - handleName: m_btn_left_Image
+      component: {fileID: 4593323432400734697, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+    - handleName: m_btn_right_Button
+      component: {fileID: 6786746726298263149, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+    - handleName: m_btn_right_Image
+      component: {fileID: 1486589663485713338, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+    - handleName: m_img_Bg_Image
+      component: {fileID: 4445511691184238561, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
