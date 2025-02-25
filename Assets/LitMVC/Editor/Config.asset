@@ -34,5 +34,88 @@ MonoBehaviour:
       component: {fileID: 6786746726298263149, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
     - handleName: m_btn_right_Image
       component: {fileID: 1486589663485713338, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+    - handleName: m_SubPage_SubView
+      component: {fileID: 3013734973523575476, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+  - scriptName: LitMVC.SubPageView
+    uiPrefab: {fileID: 6494345585629993837, guid: 38d6538b728f2cd49a3e46c0e0312b58, type: 3}
+    components:
     - handleName: m_img_Bg_Image
-      component: {fileID: 4445511691184238561, guid: 382fa77a4a4007946ad4cca3a3e23eb4, type: 3}
+      component: {fileID: 8771217353966125428, guid: 38d6538b728f2cd49a3e46c0e0312b58, type: 3}
+  - scriptName: LitMVC.TestPageView
+    uiPrefab: {fileID: 6977398180018836974, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    components:
+    - handleName: m_img_bg_Image
+      component: {fileID: 2318376721998888646, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_btn_1_Button
+      component: {fileID: 8800028800107728385, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_btn_1_Image
+      component: {fileID: 907624112387689671, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_btn_2_Button
+      component: {fileID: 253941852711943652, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_btn_2_Image
+      component: {fileID: 6467468355105015333, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_btn_3_Button
+      component: {fileID: 3107776410113397279, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_btn_3_Image
+      component: {fileID: 8373451986399014738, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_SubPage_SubView
+      component: {fileID: 6319256318297517420, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_SubPage_Variant_SubView
+      component: {fileID: 2746746787881549782, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_bg_img_Image
+      component: {fileID: 9111129031546643943, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+  - scriptName: LitMVC.SubOfSub_VariantView
+    uiPrefab: {fileID: 924687584675991614, guid: 3bee863208468fc42a56cc6b655a33c1, type: 3}
+    components: []
+  - scriptName: LitMVC.SubOfSubView
+    uiPrefab: {fileID: 6219193937690811262, guid: 7dafaa72e3d994d43b29a8638d8da105, type: 3}
+    components:
+    - handleName: m_bg_img_Image
+      component: {fileID: 7058806395572031168, guid: 7dafaa72e3d994d43b29a8638d8da105, type: 3}
+  - scriptName: LitMVC.Page2View
+    uiPrefab: {fileID: 4193654930847388973, guid: b351cfa06510ed946b4e080a5a339fa0, type: 3}
+    components:
+    - handleName: m_btn_back_Button
+      component: {fileID: 7272285939796239670, guid: b351cfa06510ed946b4e080a5a339fa0, type: 3}
+    - handleName: m_btn_back_Image
+      component: {fileID: 3918907645268017696, guid: b351cfa06510ed946b4e080a5a339fa0, type: 3}
+    - handleName: m_text_t_TMP_Text
+      component: {fileID: 1475046343501328560, guid: b351cfa06510ed946b4e080a5a339fa0, type: 3}
+    - handleName: m_btn_left_Button
+      component: {fileID: 2462872107096149663, guid: b351cfa06510ed946b4e080a5a339fa0, type: 3}
+    - handleName: m_btn_left_Image
+      component: {fileID: 1870566601190560152, guid: b351cfa06510ed946b4e080a5a339fa0, type: 3}
+    - handleName: m_btn_right_Button
+      component: {fileID: 5078197550120435827, guid: b351cfa06510ed946b4e080a5a339fa0, type: 3}
+    - handleName: m_btn_right_Image
+      component: {fileID: 2178345223198958692, guid: b351cfa06510ed946b4e080a5a339fa0, type: 3}
+    - handleName: m_SubPage_SubView
+      component: {fileID: 6602558529463409826, guid: b351cfa06510ed946b4e080a5a339fa0, type: 3}
+  - scriptName: LitMVC.Page3View
+    uiPrefab: {fileID: 2591697888014546765, guid: 480891e9d59cf3640838860773033f3a, type: 3}
+    components:
+    - handleName: m_btn_back_Button
+      component: {fileID: 6326819481467492695, guid: 480891e9d59cf3640838860773033f3a, type: 3}
+    - handleName: m_btn_back_Image
+      component: {fileID: 7012096549640821810, guid: 480891e9d59cf3640838860773033f3a, type: 3}
+    - handleName: m_text_t_TMP_Text
+      component: {fileID: 1674638810208551402, guid: 480891e9d59cf3640838860773033f3a, type: 3}
+    - handleName: m_btn_left_Button
+      component: {fileID: 2698823096261079656, guid: 480891e9d59cf3640838860773033f3a, type: 3}
+    - handleName: m_btn_left_Image
+      component: {fileID: 2223489029967889869, guid: 480891e9d59cf3640838860773033f3a, type: 3}
+    - handleName: m_btn_right_Button
+      component: {fileID: 4409544894079734605, guid: 480891e9d59cf3640838860773033f3a, type: 3}
+    - handleName: m_btn_right_Image
+      component: {fileID: 6026162378944097390, guid: 480891e9d59cf3640838860773033f3a, type: 3}
+    - handleName: m_SubPage_SubView
+      component: {fileID: 7414638916043487874, guid: 480891e9d59cf3640838860773033f3a, type: 3}
+  - scriptName: LitMVC.SubPage_VariantView
+    uiPrefab: {fileID: 2111617563050964312, guid: 51ae7b6f9bc294b47999d42c5957b246, type: 3}
+    components:
+    - handleName: m_SubOfSub_SubView
+      component: {fileID: 1705523198836215637, guid: 51ae7b6f9bc294b47999d42c5957b246, type: 3}
+    - handleName: m_SubOfSub_Variant_SubView
+      component: {fileID: 8304756765578754543, guid: 51ae7b6f9bc294b47999d42c5957b246, type: 3}
+    - handleName: m_bg2_img_Image
+      component: {fileID: 1047450973610080506, guid: 51ae7b6f9bc294b47999d42c5957b246, type: 3}

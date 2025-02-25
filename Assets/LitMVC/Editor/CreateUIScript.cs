@@ -64,9 +64,16 @@ public class CreateUIScript : Editor {
         scriptText.AppendLine("using UnityEngine;");
         scriptText.AppendLine("using UnityEngine.UI;");
         scriptText.AppendLine("using TMPro;");
-        scriptText.AppendLine("using LitMVC;");
         scriptText.AppendLine("namespace LitMVC {");
-        scriptText.AppendLine($"\tpublic partial class {scriptName} : UIView {{");
+        scriptText.Append($"\tpublic partial class {scriptName} ");
+        var baseName = "UIView";
+        if (PrefabUtility.IsPartOfVariantPrefab(uiPrefab)) {
+            var originalPrefab=PrefabUtility.GetCorrespondingObjectFromOriginalSource(uiPrefab);
+            if (_mvcUIConfig.TryGetData(originalPrefab, out var originalViewData)) {
+                baseName = originalViewData.scriptName;
+            } 
+        }
+        scriptText.AppendLine($": {baseName} {{");
         scriptText.AppendLine($"\t\tpublic const string VIEW_NAME = \"{uiPrefab.name}\";");
         
         foreach (var component in _componentData.Values) {
@@ -85,7 +92,7 @@ public class CreateUIScript : Editor {
         scriptText.Clear();
         if (!File.Exists(controllerFilePath)) {
             scriptText.AppendLine("namespace LitMVC {");
-            scriptText.Append("\tpublic partial class ").Append(scriptName).Append(" : UIView {").AppendLine()
+            scriptText.Append("\tpublic partial class ").Append(scriptName).Append($" : {baseName} {{").AppendLine()
                 .AppendLine("\t}").AppendLine("}");
 
             File.WriteAllText(controllerFilePath, scriptText.ToString());
@@ -152,24 +159,37 @@ public class CreateUIScript : Editor {
         if (script != null) {
             foreach (var componentMap in viewData.components) {
                 var fieldInfo = viewType.GetField(componentMap.handleName);
+                // if (!fieldInfo.FieldType.IsAssignableFrom(componentMap.component.GetType())) {
+                //     Debug.LogError($"字段 {componentMap.handleName} 的类型 {fieldInfo.FieldType} 与组件类型 {componentMap.component.GetType()} 不匹配");
+                //     continue;
+                // }
                 fieldInfo.SetValue(script, componentMap.component);
             }
         }
     }
 
-    private static void TotalComponentList(Transform ui) {
+    private static void TotalComponentList(Transform ui,bool onlyAdded=false) {
         foreach (Transform child in ui.transform) {
-            Debug.Log(child.name);
+            // 排除根节点
+            if (child == ui) continue;
+            //如果子对象是预制体或预制体变体,查找注册表。如果不存在的话按照通常规则进行
             if (PrefabUtility.IsAnyPrefabInstanceRoot(child.gameObject)) {
-                //如果子对象是预制体或预制体变体,查找注册表。如果不存在的话按照通常规则进行
-                if (_mvcUIConfig.TryGetData($"LitMVC.{child.name}View", out var viewData)) {
+                var subPrefab = PrefabUtility.GetCorrespondingObjectFromSource(child.gameObject);
+                if (_mvcUIConfig.TryGetData(subPrefab, out var viewData)) {
                     if (child.TryGetComponent(_assembly.GetType(viewData.scriptName) , out var component)) {
                         AddComponent($"m_{child.name}_SubView", viewData.scriptName, component);
                     }
+
+                    TotalComponentList(child, true);
                     continue;
                 }
             }
             if (child.name.Contains('_')) {
+                //如果根节点是预制体变体，只需统计新增组件
+                if ((onlyAdded || PrefabUtility.IsPartOfVariantPrefab(ui.gameObject)) 
+                    && !PrefabUtility.IsAddedGameObjectOverride(child.gameObject)) {
+                    continue;
+                }
                 //筛选拥有下划线命名的组件,如果存在更高匹配等级将不会匹配更低等级组件
                 int recognizableLevel = 2;
                 foreach (var type in _recognizable) {
@@ -192,31 +212,6 @@ public class CreateUIScript : Editor {
 
             TotalComponentList(child);
         }
-        
-        
-        // foreach (Transform child in ui.GetComponentsInChildren<Transform>(true)) {
-        //     if (ui!=child.gameObject && PrefabUtility.IsAnyPrefabInstanceRoot(child.gameObject)) {
-        //         //如果子对象是预制体或预制体变体,查找注册表。如果不存在的话按照通常规则进行
-        //         if (_mvcUIConfig.TryGetData($"LitMVC.{child.name}View", out var viewData)) {
-        //             if (child.TryGetComponent(_assembly.GetType(viewData.scriptName) , out var component)) {
-        //                 AddComponent(child, viewData.scriptName, component);
-        //             }
-        //             continue;
-        //         }
-        //     }
-        //
-        //     var nearestRoot = PrefabUtility.GetNearestPrefabInstanceRoot(child);
-        //     var outermostRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(child);
-        //     if (nearestRoot != outermostRoot && child.name.Contains('_')) {
-        //         //筛选拥有下划线命名的组件
-        //         foreach (var type in _recognizable) {
-        //             if (child.TryGetComponent(type, out var component)) {
-        //                 AddComponent(child, type.Name, component);
-        //                 break;
-        //             }
-        //         }
-        //     }
-        // }
     }
     private static void AddComponent(string childName,string type,Component component) {
         var data = new ComponentData() { name = childName, type = type,component = component};
