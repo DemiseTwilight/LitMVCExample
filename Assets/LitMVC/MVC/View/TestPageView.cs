@@ -14,5 +14,7 @@ namespace LitMVC {
 		public LitMVC.SubPageView m_SubPage_SubView;
 		public LitMVC.SubPage_VariantView m_SubPage_Variant_SubView;
 		public Image m_bg_img_Image;
+		public TMP_Text m_test1_text_TMP_Text;
+		public TMP_Text m_test2_text_TMP_Text;
 	}
 }

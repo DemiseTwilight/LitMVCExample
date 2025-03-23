@@ -64,6 +64,10 @@ MonoBehaviour:
       component: {fileID: 2746746787881549782, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
     - handleName: m_bg_img_Image
       component: {fileID: 9111129031546643943, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_test1_text_TMP_Text
+      component: {fileID: 8649003203498813841, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
+    - handleName: m_test2_text_TMP_Text
+      component: {fileID: 4500114176338172044, guid: 014152b89a7aba04cb92afdfdaaf975c, type: 3}
   - scriptName: LitMVC.SubOfSub_VariantView
     uiPrefab: {fileID: 924687584675991614, guid: 3bee863208468fc42a56cc6b655a33c1, type: 3}
     components: []
