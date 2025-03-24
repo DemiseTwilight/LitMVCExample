@@ -133,7 +133,6 @@ public class ConfigEditor : Editor {
 public struct ViewData {
     public string scriptName;
     public GameObject uiPrefab;
-    public List<ComponentMap> components;
 
     public override bool Equals(object obj) {
         return obj is ViewData other && uiPrefab.Equals(other.uiPrefab);
@@ -142,9 +141,4 @@ public struct ViewData {
     public override int GetHashCode() {
         return uiPrefab.GetHashCode();
     }
-}
-[Serializable]
-public struct ComponentMap {
-    public string handleName;
-    public Component component;
 }
