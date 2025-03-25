@@ -6,7 +6,7 @@ namespace LitMVC {
 		public const string VIEW_NAME = "SubOfSub";
 		[HideInInspector] public Image m_bg_img_Image;
 		private void BindView() {
-			m_bg_img_Image = transform.Find("SubOfSub/bg_img").GetComponent<Image>();
+			m_bg_img_Image = transform.Find("bg_img").GetComponent<Image>();
 		}
 	}
 }

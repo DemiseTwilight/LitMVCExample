@@ -13,7 +13,7 @@ namespace LitMVC {
 
 		public void Refresh() {
 			m_test1_text_TMP_Text.text = _service.data[0].text1;
-			m_test1_text_TMP_Text.text = _service.data[0].text2;
+			m_test2_text_TMP_Text.text = _service.data[0].text2;
 		}
 	}
 }

@@ -36,16 +36,20 @@ public class CreateUIScript : Editor {
     private static void GenUIView() {
         try {
             AssetDatabase.StartAssetEditing();
-            GameObject uiPrefab = Selection.activeGameObject as GameObject;
-            if (!uiPrefab) return;
+            var uiPrefabs = Selection.gameObjects;
+            if (uiPrefabs == null) return;
             if (!_mvcUIConfig) _mvcUIConfig = UIConfig.GetUIConfig();
-            CreateUIBind(uiPrefab);
+            foreach (var uiPrefab in uiPrefabs) {
+                CreateUIBind(uiPrefab);
+            }
         }
         catch (Exception e) {
             Debug.LogError(e);
             throw;
         }
         finally {
+            EditorUtility.SetDirty(_mvcUIConfig);
+            AssetDatabase.SaveAssets();
             AssetDatabase.StopAssetEditing();
             AssetDatabase.Refresh();
         }
@@ -112,11 +116,6 @@ public class CreateUIScript : Editor {
             uiPrefab = uiPrefab,
         };
         _mvcUIConfig.AddOrUpdate(uiBindData);
-
-        EditorUtility.SetDirty(_mvcUIConfig);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-
     }
 
     [DidReloadScripts(1)]
