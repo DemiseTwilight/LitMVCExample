@@ -78,7 +78,7 @@ public class CreateUIScript : Editor {
             scriptText.AppendLine($"\t\t[HideInInspector] public {component.type} {component.name};");
         }
 
-        scriptText.AppendLine("\t\tprivate void Awake() {");
+        scriptText.AppendLine("\t\tprivate void BindView() {");
         foreach (var component in _componentData.Values) {
             scriptText.AppendLine(
                 $"\t\t\t{component.name} = transform.Find(\"{component.path}\").GetComponent<{component.type}>();");
@@ -97,8 +97,11 @@ public class CreateUIScript : Editor {
         scriptText.Clear();
         if (!File.Exists(controllerFilePath)) {
             scriptText.AppendLine("namespace LitMVC {");
-            scriptText.Append("\tpublic partial class ").Append(scriptName).Append($" : {baseName} {{").AppendLine()
-                .AppendLine("\t}").AppendLine("}");
+            scriptText.Append("\tpublic partial class ").Append(scriptName).Append($" : {baseName} {{").AppendLine();
+            scriptText.AppendLine("\t\tprivate void Awake() {");
+            scriptText.AppendLine("\t\t\tBindView();");
+            scriptText.AppendLine("\t\t}");
+            scriptText.AppendLine("\t}").AppendLine("}");
 
             File.WriteAllText(controllerFilePath, scriptText.ToString());
         }
@@ -157,19 +160,19 @@ public class CreateUIScript : Editor {
         }
     }
 
-    private static void TotalComponentList(Transform ui,string parentPath="",bool onlyAdded=false) {
-        string path = ui.name;
+    private static void TotalComponentList(Transform ui,string parentPath=null,bool onlyAdded=false) {
+        string path;
         foreach (Transform child in ui.transform) {
             // 排除根节点
             if (child == ui) continue;
+            path=string.IsNullOrEmpty(parentPath)?child.name:$"{parentPath}/{child.name}";
             //如果子对象是预制体或预制体变体,查找注册表。如果不存在的话按照通常规则进行
             if (PrefabUtility.IsAnyPrefabInstanceRoot(child.gameObject)) {
                 var subPrefab = PrefabUtility.GetCorrespondingObjectFromSource(child.gameObject);
                 if (_mvcUIConfig.TryGetData(subPrefab, out var viewData)) {
                     if (child.TryGetComponent(_assembly.GetType(viewData.scriptName) , out _)) {
-                        AddComponent($"m_{child.name}_SubView", viewData.scriptName, $"{path}/{child.name}");
+                        AddComponent($"m_{child.name}_SubView", viewData.scriptName, path);
                     }
-
                     TotalComponentList(child,path, true);
                     continue;
                 }
@@ -184,7 +187,7 @@ public class CreateUIScript : Editor {
                 int recognizableLevel = 2;
                 foreach (var type in _recognizable) {
                     if (child.TryGetComponent(type, out _)) {
-                        AddComponent($"m_{child.name}_{type.Name}", type.Name, $"{path}/{child.name}");
+                        AddComponent($"m_{child.name}_{type.Name}", type.Name, path);
                         recognizableLevel = 1;
                     }
                 }
@@ -193,14 +196,13 @@ public class CreateUIScript : Editor {
                     recognizableLevel = 3;
                     foreach (var type in _recognizable2) {
                         if (child.TryGetComponent(type, out _)) {
-                            AddComponent($"m_{child.name}", type.Name, $"{path}/{child.name}");
+                            AddComponent($"m_{child.name}", type.Name, path);
                             recognizableLevel = 2;
                         }
                     }
                 }
             }
-
-            TotalComponentList(child);
+            TotalComponentList(child,path);
         }
     }
     private static void AddComponent(string childName,string type,string path) {
