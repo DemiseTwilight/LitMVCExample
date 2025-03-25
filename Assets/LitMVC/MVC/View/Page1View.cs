@@ -12,7 +12,7 @@ namespace LitMVC {
 		[HideInInspector] public Button m_btn_right_Button;
 		[HideInInspector] public Image m_btn_right_Image;
 		[HideInInspector] public LitMVC.SubPageView m_SubPage_SubView;
-		private void Awake() {
+		private void BindView() {
 			m_text_t_TMP_Text = transform.Find("Page1/text_t").GetComponent<TMP_Text>();
 			m_btn_back_Button = transform.Find("Page1/btn_back").GetComponent<Button>();
 			m_btn_back_Image = transform.Find("Page1/btn_back").GetComponent<Image>();
