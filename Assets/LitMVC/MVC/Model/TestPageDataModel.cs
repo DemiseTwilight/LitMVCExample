@@ -8,11 +8,12 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace LitMVC{
-    public class TestPageDataModel {
+    public class TestPageDataModel : DataModel {
     public List<TestPageData> data;
-    public bool Loaded { get; private set; } = false;
+    private static TestPageDataModel _instance;
+    public static TestPageDataModel Instance => _instance ??= new TestPageDataModel();
 
-    public async Task LoadData() {
+    public override async Task LoadData() {
         try {
             var asset = await Addressables.LoadAssetAsync<TextAsset>("Assets/Data/TestPageData.json").Task;
             if (asset!=null) {
