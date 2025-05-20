@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LitMVC {
@@ -7,10 +8,10 @@ namespace LitMVC {
         public List<TestPageData> data;
         public async Task Init() {
             if (!_dataModel.Loaded) {
-                await _dataModel.LoadData();
+                await _dataModel.Load();
             }
 
-            data = _dataModel.data;
+            data = _dataModel.Data;
         }
     }
 }

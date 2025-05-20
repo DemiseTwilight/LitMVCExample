@@ -40,7 +40,7 @@ namespace LitMVC {
 
         private IEnumerator LoadData() {
             foreach (var dataModel in _dataModels) {
-                yield return dataModel.LoadData();
+                yield return dataModel.Load();
             }
 
             LoadUIAsync(UIMap.TestPage, null);
